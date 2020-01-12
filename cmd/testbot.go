@@ -97,7 +97,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if strings.Contains(m.Content, "cookie") {
-		s.MessageReactionAdd(m.ChannelID, m.ID, ":cookie:")
+		s.MessageReactionAdd(m.ChannelID, m.ID, "cookie")
 	}
 
 	if m.Content == "!distronews" {
