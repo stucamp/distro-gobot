@@ -107,6 +107,7 @@ func isDesired(wanted string) bool {
 	return false
 }
 
+//TODO: move to JSON and allow users to add/remove watched distros
 func watchedDistros() string {
 	distros := []string{"debian", "neon", "raspbian", "ubuntu", "antergos", "manjaro", "CentOS", "Fedora", "kali", "tails", "popos",
 		"ipfire", "elementaryos", "pfsense", "openmediavault", "FreeNAS", "FreeBSD", "Peppermint", "mint",
