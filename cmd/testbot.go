@@ -62,7 +62,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if strings.Contains(m.Content, "mint") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
-		s.ChannelMessageSend(m.ChannelID, "Mint devs are lazy and you should use a REAL distro!")
+		s.ChannelMessageSend(m.ChannelID, "https://media2.giphy.com/media/XsUtdIeJ0MWMo/source.gif")
 	}
 
 	if strings.Contains(m.Content, "nomachine") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
