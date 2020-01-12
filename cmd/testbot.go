@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
@@ -59,13 +60,75 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
-	// If the message is "ping" reply with "Pong!"
-	if m.Content == "ping" {
-		s.ChannelMessageSend(m.ChannelID, "Pong!")
+
+	if strings.Contains(m.Content, "mint") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+		s.ChannelMessageSend(m.ChannelID, "Mint devs are lazy and you should use a REAL distro!")
 	}
 
-	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	if strings.Contains(m.Content, "nomachine") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+		s.ChannelMessageSend(m.ChannelID, "Real pros, only use CLI")
 	}
+
+	if m.Content == "PAVLOS!!!" && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+		s.ChannelMessageSend(m.ChannelID, "Stop tinkering...")
+	}
+
+	if strings.Contains(m.Content, "παύλος") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+		s.ChannelMessageSend(m.ChannelID, "Stop tinkering...")
+	}
+
+	if m.Content == "!distrobot" {
+		var output string
+		output = "Commands are as follows:\n\n"
+		output += "!distronews - Prints release to latest DistroWatch News\n"
+		output += "!newreleases - Prints new releases\n"
+		output += "!distreleases - Prints new distribution news\n"
+		output += "!devreleases - Prints new devleopement news\n"
+		output += "!security - Prints recent security news\n"
+		output += "!isotorrent - Prints recently release torrent links\n"
+		output += "!watched - Prints list of distros that will be returned by !isotorrent if available\n"
+
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!distronews" {
+		urlmap := getURLmap()
+		output := printDistroWatchNews(urlmap)
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!distreleases" {
+		urlmap := getURLmap()
+		output := printDistReleaseNews(urlmap)
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!devreleases" {
+		urlmap := getURLmap()
+		output := printDevReleaseNews(urlmap)
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!newreleases" {
+		urlmap := getURLmap()
+		output := printReleases(urlmap)
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!security" {
+		urlmap := getURLmap()
+		output := printSecurityNews(urlmap)
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!isotorrent" {
+		urlmap := getURLmap()
+		output := printTorrents(urlmap)
+		s.ChannelMessageSend(m.ChannelID, output)
+	}
+
+	if m.Content == "!watched" {
+		s.ChannelMessageSend(m.ChannelID, watchedDistros())
+	}
+
 }

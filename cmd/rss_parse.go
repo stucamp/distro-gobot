@@ -1,33 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/mmcdole/gofeed"
 )
 
-func main() {
-
-	//_, month, day := time.Now().Date()
-	//fmt.Printf("%02d/%02d\n", month, day)
-
-	print_dist_release_news(get_URL_map())
-}
-
-func print_title_link(input *gofeed.Item) {
-	fmt.Println(input.Title)
-	fmt.Println(input.Link)
-	fmt.Print("\n")
-}
-
-func parse_url(url string) *gofeed.Feed {
-	fp := gofeed.NewParser()
-	output, _ := fp.ParseURL(url)
-	return output
-}
-
-func get_URL_map() map[string]string {
+func getURLmap() map[string]string {
 	var m map[string]string
 	m = make(map[string]string)
 	m["news"] = "https://distrowatch.com/news/dw.xml"
@@ -37,21 +16,105 @@ func get_URL_map() map[string]string {
 	return m
 }
 
-func print_dev_release_news(m map[string]string) {
-	release := parse_url(m["news"])
-	for _, thing := range release.Items {
-		if !strings.Contains(thing.Title, "Distribution") {
-			print_title_link(thing)
-		}
-	}
+func strFormatOut(input *gofeed.Item) string {
+	var output string = input.Title + "\n" + input.Link + "\n"
+	return output
 }
 
-func print_dist_release_news(m map[string]string) {
-	release := parse_url(m["news"])
-	for _, thing := range release.Items {
-		if strings.Contains(thing.Title, "Distribution") {
-			print_title_link(thing)
+func parseUrlforStu(url string) *gofeed.Feed {
+	fp := gofeed.NewParser()
+	output, _ := fp.ParseURL(url)
+	return output
+}
 
+func printReleases(m map[string]string) string {
+	release := parseUrlforStu(m["release"])
+	var output string
+	for _, thing := range release.Items {
+		output += strFormatOut(thing)
+		output += "\n"
+	}
+	return output
+}
+
+func printTorrents(m map[string]string) string {
+	release := parseUrlforStu(m["torrent"])
+	var output string
+	for _, thing := range release.Items {
+		if isDesired(thing.Title) {
+			output += strFormatOut(thing)
+			output += "\n"
 		}
 	}
+	return output
+}
+
+func printDistroWatchNews(m map[string]string) string {
+	release := parseUrlforStu(m["news"])
+	var output string
+	for _, thing := range release.Items {
+		if strings.Contains(thing.Title, "DistroWatch Weekly") {
+			output += strFormatOut(thing)
+			output += "\n"
+		}
+	}
+	return output
+}
+
+func printDevReleaseNews(m map[string]string) string {
+	release := parseUrlforStu(m["news"])
+	var output string
+	for _, thing := range release.Items {
+		if strings.Contains(thing.Title, "Development") {
+			output += strFormatOut(thing)
+			output += "\n"
+		}
+	}
+	return output
+}
+
+func printDistReleaseNews(m map[string]string) string {
+	release := parseUrlforStu(m["news"])
+	var output string
+	for _, thing := range release.Items {
+		if strings.Contains(thing.Title, "Distribution") {
+			output += strFormatOut(thing)
+			output += "\n"
+		}
+	}
+	return output
+}
+
+func printSecurityNews(m map[string]string) string {
+	release := parseUrlforStu(m["security"])
+	var output string
+	for _, thing := range release.Items {
+		output += strFormatOut(thing)
+		output += "\n"
+	}
+	return output
+}
+
+func isDesired(wanted string) bool {
+	distros := []string{"debian", "neon", "raspbian", "ubuntu", "antergos", "manjaro", "CentOS", "Fedora", "kali", "tails", "popos",
+		"ipfire", "elementaryos", "pfsense", "openmediavault", "FreeNAS", "FreeBSD", "Peppermint", "mint",
+		"openSUSE", "Zorin", "proxmox", "gparted-live", "systemrescuedc", "OSMC", "FreeBSD", "untangle"}
+	for _, distro := range distros {
+		if strings.Contains(wanted, distro) {
+			return true
+		}
+	}
+	return false
+}
+
+func watchedDistros() string {
+	distros := []string{"debian", "neon", "raspbian", "ubuntu", "antergos", "manjaro", "CentOS", "Fedora", "kali", "tails", "popos",
+		"ipfire", "elementaryos", "pfsense", "openmediavault", "FreeNAS", "FreeBSD", "Peppermint", "mint",
+		"openSUSE", "Zorin", "proxmox", "gparted-live", "systemrescuedc", "OSMC", "FreeBSD", "untangle"}
+
+	var output string
+	for _, distro := range distros {
+		output += distro + "\n"
+	}
+	return output
 }
