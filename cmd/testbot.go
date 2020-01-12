@@ -96,6 +96,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
+	if strings.Contains(m.Content, "cookie") {
+		s.MessageReactionAdd(m.ChannelID, m.ID, ":cookie:")
+	}
+
 	if m.Content == "!distronews" {
 		output := printDistroWatchNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
