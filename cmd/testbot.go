@@ -62,7 +62,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if strings.Contains(m.Content, "mint") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
-		s.ChannelMessageSend(m.ChannelID, "https://media2.giphy.com/media/XsUtdIeJ0MWMo/source.gif")
+		f, err := os.Open("./source.gif")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer f.Close()
+		s.ChannelFileSend(m.ChannelID, "facepalm.gif", f)
 	}
 
 	if strings.Contains(m.Content, "nomachine") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
