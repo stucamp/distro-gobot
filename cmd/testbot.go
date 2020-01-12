@@ -92,38 +92,32 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "!distronews" {
-		urlmap := getURLmap()
-		output := printDistroWatchNews(urlmap)
+		output := printDistroWatchNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
 	if m.Content == "!distreleases" {
-		urlmap := getURLmap()
-		output := printDistReleaseNews(urlmap)
+		output := printDistReleaseNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
 	if m.Content == "!devreleases" {
-		urlmap := getURLmap()
-		output := printDevReleaseNews(urlmap)
+		output := printDevReleaseNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
 	if m.Content == "!newreleases" {
-		urlmap := getURLmap()
-		output := printReleases(urlmap)
+		output := printReleases(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
 	if m.Content == "!security" {
-		urlmap := getURLmap()
-		output := printSecurityNews(urlmap)
+		output := printSecurityNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
 	if m.Content == "!isotorrent" {
-		urlmap := getURLmap()
-		output := printTorrents(urlmap)
+		output := printTorrents(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
 	}
 
