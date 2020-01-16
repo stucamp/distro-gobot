@@ -140,7 +140,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		if AuthExists(auth[1]) {
 			resp = GetRandQuote(strings.ToLower(auth[1]))
 		} else {
-			resp = "That author doesn't have any quotes yet!"
+			resp = auth[1] + "doesn't have any quotes yet!"
 		}
 		s.ChannelMessageSend(m.ChannelID, resp)
 	}
