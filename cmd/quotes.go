@@ -46,15 +46,25 @@ func readJSON(auth string) []string {
 }
 
 func randQuote(quotes []string) string {
-	rand.Seed(time.Now().Unix())
-	return quotes[rand.Intn(len(quotes))]
+	randseed := time.Now().Unix()
+	fmt.Printf("%d used as random seed\n", randseed)
+	rand.Seed(randseed)
+	quote := quotes[rand.Intn(len(quotes))]
+	fmt.Printf("\"%s\" used as output\n", quote)
+	return quote
 }
 
 // GetRandQuote takes an authore name as string and returns a randome quote stored
 // in JSON if one such quote exists
 func GetRandQuote(auth string) string {
 	quotes := readJSON(auth)
-	return (randQuote(quotes))
+	fmt.Println("Printing array of quotes")
+	for _, quote := range quotes {
+		fmt.Println(quote)
+	}
+	randomQ := randQuote(quotes)
+	fmt.Printf("%s\n Selected as quote", randomQ)
+	return (randomQ)
 }
 
 // AuthDontExist checks if author specified has quotes in the JSON
