@@ -94,44 +94,53 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		output += "!watched - Prints list of distros that will be returned by !isotorrent if available\n"
 
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if strings.Contains(m.Content, "cookie") {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "🍪")
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!distronews" {
 		output := printDistroWatchNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!distreleases" {
 		output := printDistReleaseNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!devreleases" {
 		output := printDevReleaseNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!newreleases" {
 		output := printReleases(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!security" {
 		output := printSecurityNews(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!isotorrent" {
 		output := printTorrents(getURLmap())
 		s.ChannelMessageSend(m.ChannelID, output)
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!watched" {
 		s.ChannelMessageSend(m.ChannelID, watchedDistros())
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if strings.Contains(m.Content, "!quote") {
@@ -140,9 +149,11 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		if AuthExists(auth[1]) {
 			resp = GetRandQuote(strings.ToLower(auth[1]))
 		} else {
-			resp = auth[1] + "doesn't have any quotes yet!"
+			resp = auth[1] + " doesn't have any quotes yet!"
 		}
 		s.ChannelMessageSend(m.ChannelID, resp)
+
+		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 }

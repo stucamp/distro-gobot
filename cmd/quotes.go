@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"strings"
@@ -29,6 +30,7 @@ func readJSON(auth string) []string {
 	}
 
 	for k := range quotes {
+		fmt.Printf("Comparing %s and %s...\n", strings.ToLower(quotes[k].Author), strings.ToLower(auth))
 		if strings.ToLower(quotes[k].Author) == strings.ToLower(auth) {
 			return quotes[k].Sayings
 		}
