@@ -20,6 +20,7 @@ func readJSON(auth string) []string {
 	file, err0 := ioutil.ReadFile(filepath) // For read access.
 	if err0 != nil {
 		fmt.Println("Failed to read file quotes.json")
+		fmt.Println(err0)
 		panic(err0)
 	}
 
@@ -28,6 +29,7 @@ func readJSON(auth string) []string {
 	err1 := json.Unmarshal(file, &quotes)
 	if err1 != nil {
 		fmt.Println("Failed to parse the json")
+		fmt.Println(err1)
 		panic(err1)
 	}
 
@@ -54,6 +56,6 @@ func GetRandQuote(auth string) string {
 }
 
 // AuthExists checks if author specified has quotes in the JSON
-func AuthExists(auth string) bool {
-	return len(readJSON(auth)) <= 0
+func AuthDontExist(auth string) bool {
+	return len(readJSON(auth)) == 0
 }
