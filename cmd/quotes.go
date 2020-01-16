@@ -37,7 +37,12 @@ func readJSON(auth string) []string {
 		fmt.Printf("Comparing %s and %s...\n", strings.ToLower(quotes[k].Author), strings.ToLower(auth))
 		if strings.ToLower(quotes[k].Author) == strings.ToLower(auth) {
 			fmt.Println("Match Success")
-			return quotes[k].Sayings
+			arrquotes := quotes[k].Sayings
+			fmt.Printf("Found these %d quotes:\n", len(arrquotes))
+			for _, quote := range arrquotes {
+				fmt.Println(quote)
+			}
+			return arrquotes
 		}
 	}
 
@@ -60,6 +65,7 @@ func GetRandQuote(auth string) (bool, string) {
 	quotes := readJSON(auth)
 	var randomQ string
 	isThere := false
+	fmt.Printf("The quote array is %d long", len(quotes))
 	if len(quotes) > 0 {
 		fmt.Println("Printing array of quotes")
 		for _, quote := range quotes {
