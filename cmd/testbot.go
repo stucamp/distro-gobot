@@ -85,7 +85,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Content == "!distrobot" {
 		var output string
 		output = "Commands are as follows:\n\n"
-		output += "!distronews - Prints release to latest DistroWatch News\n"
+		output += "!distronews - Prints link to latest DistroWatch News\n"
 		output += "!newreleases - Prints new releases\n"
 		output += "!distreleases - Prints new distribution news\n"
 		output += "!devreleases - Prints new devleopement news\n"
@@ -132,6 +132,17 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if m.Content == "!watched" {
 		s.ChannelMessageSend(m.ChannelID, watchedDistros())
+	}
+
+	if strings.Contains(m.Content, "!quote") {
+		auth := strings.Split(m.Content, " ")
+		var resp string
+		if AuthExists(auth[1]) {
+			resp = GetRandQuote(strings.ToLower(auth[1]))
+		} else {
+			resp = "That author doesn't have any quotes yet!"
+		}
+		s.ChannelMessageSend(m.ChannelID, resp)
 	}
 
 }
