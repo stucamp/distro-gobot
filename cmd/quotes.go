@@ -36,10 +36,12 @@ func readJSON(auth string) []string {
 	for k := range quotes {
 		fmt.Printf("Comparing %s and %s...\n", strings.ToLower(quotes[k].Author), strings.ToLower(auth))
 		if strings.ToLower(quotes[k].Author) == strings.ToLower(auth) {
+			fmt.Println("Match Success")
 			return quotes[k].Sayings
 		}
 	}
 
+	fmt.Println("Match Failed")
 	return make([]string, 0)
 }
 
@@ -55,7 +57,7 @@ func GetRandQuote(auth string) string {
 	return (randQuote(quotes))
 }
 
-// AuthExists checks if author specified has quotes in the JSON
+// AuthDontExist checks if author specified has quotes in the JSON
 func AuthDontExist(auth string) bool {
 	return len(readJSON(auth)) == 0
 }
