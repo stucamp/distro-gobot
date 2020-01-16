@@ -146,12 +146,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.Contains(m.Content, "!quote") {
 		fmt.Printf("Parsing %s\n", m.Content)
 		auth := strings.Split(m.Content, " ")
-		var resp string
-		if !AuthDontExist(auth[1]) {
-			resp = GetRandQuote(strings.ToLower(auth[1]))
+		isThere, quote := GetRandQuote(auth[1])
+		if isThere {
+			s.ChannelMessageSend(m.ChannelID, quote)
 		} else {
-			resp = auth[1] + " doesn't have any quotes yet!"
+			neg := auth[1] + " has no quotes in the db"
+			s.ChannelMessageSend(m.ChannelID, neg)
 		}
-		s.ChannelMessageSend(m.ChannelID, resp)
 	}
 }

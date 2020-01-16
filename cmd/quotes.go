@@ -56,18 +56,21 @@ func randQuote(quotes []string) string {
 
 // GetRandQuote takes an authore name as string and returns a randome quote stored
 // in JSON if one such quote exists
-func GetRandQuote(auth string) string {
+func GetRandQuote(auth string) (bool, string) {
 	quotes := readJSON(auth)
-	fmt.Println("Printing array of quotes")
-	for _, quote := range quotes {
-		fmt.Println(quote)
+	var randomQ string
+	isThere := false
+	if len(quotes) > 0 {
+		fmt.Println("Printing array of quotes")
+		for _, quote := range quotes {
+			fmt.Println(quote)
+		}
+		randomQ = randQuote(quotes)
+		isThere = true
+		fmt.Printf("%s\n Selected as quote", randomQ)
+	} else {
+		fmt.Println("Didn't find anything in quote array")
+		randomQ = ""
 	}
-	randomQ := randQuote(quotes)
-	fmt.Printf("%s\n Selected as quote", randomQ)
-	return (randomQ)
-}
-
-// AuthDontExist checks if author specified has quotes in the JSON
-func AuthDontExist(auth string) bool {
-	return len(readJSON(auth)) == 0
+	return isThere, randomQ
 }
