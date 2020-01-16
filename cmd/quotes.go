@@ -53,5 +53,5 @@ func GetRandQuote(auth string) string {
 
 // AuthExists checks if author specified has quotes in the JSON
 func AuthExists(auth string) bool {
-	return len(readJSON(auth)) > 0
+	return (len(readJSON(auth)) <= 0)
 }
