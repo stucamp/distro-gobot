@@ -6,7 +6,9 @@ import (
 )
 
 // GetRandNum returns a random num from 0 - 100
-func GetRandNum() int {
+func GetRandNum() string {
 	rand.Seed(time.Now().Unix())
-	return rand.Intn(100)
+	var output string
+	output = string(rand.Intn(100))
+	return output
 }
