@@ -154,4 +154,8 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			s.ChannelMessageSend(m.ChannelID, neg)
 		}
 	}
+
+	if strings.Contains(m.Content, "!rand") {
+		s.ChannelMessageSend(m.ChannelID, string(GetRandNum()))
+	}
 }
