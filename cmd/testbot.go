@@ -64,7 +64,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if strings.Contains(m.Content, "mint") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
-		f, err := os.Open("./source.gif")
+		f, err := os.Open("./media/source.gif")
 		if err != nil {
 			fmt.Println(err)
 		}
