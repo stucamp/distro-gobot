@@ -156,6 +156,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if strings.Contains(m.Content, "!roll") {
-		s.ChannelMessageSend(m.ChannelID, GetRandNum())
+		s.ChannelMessageSend(m.ChannelID, GetRandNumStr())
 	}
 }
