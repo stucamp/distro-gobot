@@ -64,7 +64,6 @@ func watchedDistros() string {
 			output += distro + "\n"
 		}
 	}
-
 	return output
 }
 

@@ -55,6 +55,8 @@ func main() {
 // message is created on any channel that the autenticated bot has access to.
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
+	urlRSSMap := getRSSURLmap()
+
 	// Ignore all messages created by the bot itself
 	// This isn't required in this specific example but it's a good practice.
 	if m.Author.ID == s.State.User.ID {
@@ -103,37 +105,37 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "!distronews" {
-		output := printDistroWatchNews(getURLmap())
+		output := printDistroWatchNews(urlRSSMap)
 		s.ChannelMessageSend(m.ChannelID, output)
 		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!distreleases" {
-		output := printDistReleaseNews(getURLmap())
+		output := printDistReleaseNews(urlRSSMap)
 		s.ChannelMessageSend(m.ChannelID, output)
 		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!devreleases" {
-		output := printDevReleaseNews(getURLmap())
+		output := printDevReleaseNews(urlRSSMap)
 		s.ChannelMessageSend(m.ChannelID, output)
 		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!newreleases" {
-		output := printReleases(getURLmap())
+		output := printReleases(urlRSSMap)
 		s.ChannelMessageSend(m.ChannelID, output)
 		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!security" {
-		output := printSecurityNews(getURLmap())
+		output := printSecurityNews(urlRSSMap)
 		s.ChannelMessageSend(m.ChannelID, output)
 		fmt.Printf("Parsing %s\n", m.Content)
 	}
 
 	if m.Content == "!isotorrent" {
-		output := printTorrents(getURLmap())
+		output := printTorrents(urlRSSMap)
 		s.ChannelMessageSend(m.ChannelID, output)
 		fmt.Printf("Parsing %s\n", m.Content)
 	}
