@@ -1,9 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"strings"
 
 	"github.com/mmcdole/gofeed"
@@ -15,36 +12,7 @@ type source struct {
 	URL    string
 }
 
-const urlsfilepath = "./urls.json"
-
-// Read a JSON file containing relavent links to various RSS feeds
-func getJSONURLmap(inSource string) (bool, string) {
-	file, err0 := ioutil.ReadFile(urlsfilepath) // For read access.
-	if err0 != nil {
-		fmt.Println("Failed to read file urls.json")
-		fmt.Println(err0)
-		panic(err0)
-	}
-
-	var urls []source
-
-	err1 := json.Unmarshal(file, &urls)
-	if err1 != nil {
-		fmt.Println("Failed to parse the json")
-		fmt.Println(err1)
-		panic(err1)
-	}
-
-	for k := range urls {
-		if strings.ToLower(urls[k].Name) == strings.ToLower(inSource) {
-			fmt.Printf("Found %s source: %s\n", urls[k].Source, urls[k].Name)
-			return true, urls[k].URL
-		}
-	}
-
-	fmt.Printf("Can't find any sources for: %s\n", inSource)
-	return false, ""
-}
+const urlsfilepath = "./json/urls.json"
 
 // Creates a map of relavent links to various RSS feeds
 func getRSSURLmap() map[string]string {

@@ -1,11 +1,8 @@
-testbot
-source.gif
 botcreds.txt
 .idea/
-quotes.json
-torrents.json
-urls.json
-watched.json
+
+#json/
+#media/
 
  ￼
 # Binaries for programs and plugins
