@@ -14,10 +14,10 @@ type quote struct {
 	Sayings []string
 }
 
-const filepath = "./quotes.json"
+const quotesfilepath = "./quotes.json"
 
-func readJSON(auth string) []string {
-	file, err0 := ioutil.ReadFile(filepath) // For read access.
+func readQuotesJSON(auth string) []string {
+	file, err0 := ioutil.ReadFile(quotesfilepath) // For read access.
 	if err0 != nil {
 		fmt.Println("Failed to read file quotes.json")
 		fmt.Println(err0)
@@ -62,7 +62,7 @@ func randQuote(quotes []string) string {
 // GetRandQuote takes an authore name as string and returns a randome quote stored
 // in JSON if one such quote exists
 func GetRandQuote(auth string) (bool, string) {
-	quotes := readJSON(auth)
+	quotes := readQuotesJSON(auth)
 	var randomQ string
 	isThere := false
 	fmt.Printf("The quote array is %d long", len(quotes))

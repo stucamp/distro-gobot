@@ -94,28 +94,3 @@ func printSecurityNews(m map[string]string) string {
 	}
 	return output
 }
-
-func isDesired(wanted string) bool {
-	distros := []string{"debian", "neon", "raspbian", "ubuntu", "antergos", "manjaro", "CentOS", "Fedora", "kali", "tails", "popos",
-		"ipfire", "elementaryos", "pfsense", "openmediavault", "FreeNAS", "FreeBSD", "Peppermint", "mint",
-		"openSUSE", "Zorin", "proxmox", "gparted-live", "systemrescuedc", "OSMC", "FreeBSD", "untangle"}
-	for _, distro := range distros {
-		if strings.Contains(wanted, distro) {
-			return true
-		}
-	}
-	return false
-}
-
-//TODO: move to JSON and allow users to add/remove watched distros
-func watchedDistros() string {
-	distros := []string{"debian", "neon", "raspbian", "ubuntu", "antergos", "manjaro", "CentOS", "Fedora", "kali", "tails", "popos",
-		"ipfire", "elementaryos", "pfsense", "openmediavault", "FreeNAS", "FreeBSD", "Peppermint", "mint",
-		"openSUSE", "Zorin", "proxmox", "gparted-live", "systemrescuedc", "OSMC", "FreeBSD", "untangle"}
-
-	var output string
-	for _, distro := range distros {
-		output += distro + "\n"
-	}
-	return output
-}
