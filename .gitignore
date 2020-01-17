@@ -2,7 +2,7 @@ testbot
 source.gif
 botcreds.txt
 .idea/
-.quotes.json
+quotes.json
  ￼
 # Binaries for programs and plugins
 *.exe
