@@ -3,6 +3,10 @@ source.gif
 botcreds.txt
 .idea/
 quotes.json
+torrents.json
+urls.json
+watched.json
+
  ￼
 # Binaries for programs and plugins
 *.exe
