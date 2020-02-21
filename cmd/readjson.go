@@ -43,8 +43,8 @@ func GetSourceURLFromJSON(path string, inSource string) (bool, string) {
 
 	for k := range stuff {
 		fmt.Println("Checking for sources...")
-		if strings.ToLower(stuff[k].(source).Name) == strings.ToLower(inSource) {
-			fmt.Printf("Found %s source: %s\n", stuff[k].(source).Source, stuff[k].(source).Name)
+		if strings.ToLower(stuff[k].Name) == strings.ToLower(inSource) {
+			fmt.Printf("Found %s source: %s\n", stuff[k].Source, stuff[k].Name)
 			return true, stuff[k].(source).URL
 		}
 	}
@@ -65,7 +65,7 @@ func GetWatchListFromJSON(path string) (bool, []string) {
 		fmt.Println("Checking for watched distros...")
 		if stuff[k].(watched).Watched {
 			fmt.Printf("Found watched distro: %s\n", stuff[k].(watched).Name)
-			watchedNames = append(watchedNames, stuff[k].(watched).Name)
+			watchedNames = append(watchedNames, stuff[k].Name)
 		}
 	}
 
@@ -80,10 +80,10 @@ func GetQuotesListFromJSON(path string, auth string) (bool, []string) {
 	stuff := getJSONitems(openJSONfileAsByteArr(path))
 
 	for k := range stuff {
-		if strings.ToLower(stuff[k].(quote).Author) == strings.ToLower(auth) {
-			fmt.Printf("Found %d quotes for author: %s\n", len(stuff[k].(quote).Sayings), stuff[k].(quote).Author)
-			if len(stuff[k].(quote).Sayings) > 0 {
-				return true, stuff[k].(quote).Sayings
+		if strings.ToLower(stuff[k].Author) == strings.ToLower(auth) {
+			fmt.Printf("Found %d quotes for author: %s\n", len(stuff[k].Sayings), stuff[k].Author)
+			if len(stuff[k].Sayings) > 0 {
+				return true, stuff[k].Sayings
 			}
 			if len(stuff[k].(quote).Sayings) == 0 {
 				fmt.Printf("%s exists, but has 0 sayings\n", auth)
