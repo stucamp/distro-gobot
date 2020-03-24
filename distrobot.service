@@ -1,0 +1,29 @@
+[Unit]
+Description=distrobot-service
+ConditionPathExists=/opt/distrobot/distrobot
+After=network.target
+ 
+[Service]
+Type=simple
+User=distrobot
+Group=distrobot
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=5
+startLimitIntervalSec=60
+
+WorkingDirectory=/opt/distrobot/
+ExecStart=/opt/distrobot/distrobot -t NjY1NzY3MjgzNjg3MjkyOTU5.XhqaRQ.6WV42Jw_FVszccIdEYqinzKvKHY
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/distrobot
+ExecStartPre=/bin/chown syslog:adm /var/log/distrobot
+ExecStartPre=/bin/chmod 755 /var/log/distrobot
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=distrobot
+ 
+[Install]
+WantedBy=multi-user.target
