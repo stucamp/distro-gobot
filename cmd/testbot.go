@@ -16,6 +16,7 @@ var (
 	Token string
 )
 
+
 func init() {
 
 	flag.StringVar(&Token, "t", "", "Bot Token")
@@ -23,6 +24,8 @@ func init() {
 }
 
 func main() {
+
+
 
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + Token)
@@ -55,6 +58,8 @@ func main() {
 // message is created on any channel that the autenticated bot has access to.
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
+	paul := "746974797698695258"
+	stu := "401429986411675658"
 	urlRSSMap := getRSSURLmap()
 
 	// Ignore all messages created by the bot itself
@@ -63,24 +68,69 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if strings.Contains(m.Content, "mint") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
-		f, err := os.Open("./media/source.gif")
+	if strings.Contains(m.Content, "mint") && (m.Author.ID == stu || m.Author.ID == paul) {
+		f, err := os.Open("./media/facepalm.gif")
 		if err != nil {
 			fmt.Println(err)
 		}
 		defer f.Close()
 		s.ChannelFileSend(m.ChannelID, "facepalm.gif", f)
 	}
+	
+	if strings.Contains(strings.ToLower(m.Content), "mint") {
+		f, err := os.Open("./media/dataNO.gif")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer f.Close()
+		s.ChannelFileSend(m.ChannelID, "dataNO.gif", f)
+	}
 
-	if strings.Contains(m.Content, "nomachine") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+	if strings.Contains(strings.ToLower(m.Content), "wait what?") && (m.Author.ID == stu || m.Author.ID == paul) {
+		f, err := os.Open("./media/bubbles.gif")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer f.Close()
+		s.ChannelFileSend(m.ChannelID, "bubbles.gif", f)
+	}
+	
+	if strings.Contains(strings.ToLower(m.Content), "stu is awesome") {
+		f, err := os.Open("./media/stu.gif")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer f.Close()
+		s.ChannelFileSend(m.ChannelID, "stu.gif", f)
+	}
+	
+	if strings.Contains(strings.ToLower(m.Content), "sucks") {
+		f, err := os.Open("./media/wtf.gif")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer f.Close()
+		s.ChannelFileSend(m.ChannelID, "wtf.gif", f)
+	}
+	
+	if strings.Contains(m.Content, "ubuntu") && (m.Author.ID == stu || m.Author.ID == paul) {
+		f, err := os.Open("./media/gud.gif")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer f.Close()
+		s.ChannelFileSend(m.ChannelID, "gud.gif", f)
+	}
+
+	if strings.Contains(m.Content, "nomachine") && (m.Author.ID == paul || m.Author.ID == stu) {
 		s.ChannelMessageSend(m.ChannelID, "Real pros, only use CLI")
 	}
 
-	if m.Content == "PAVLOS!!!" && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+	if m.Content == "PAVLOS!!!" && (m.Author.ID == paul || m.Author.ID == stu) {
 		s.ChannelMessageSend(m.ChannelID, "Stop tinkering...")
 	}
 
-	if strings.Contains(m.Content, "παύλος") && (m.Author.ID == "665638806732668960" || m.Author.ID == "401429986411675658") {
+	if strings.Contains(m.Content, "παύλος") && (m.Author.ID == paul || m.Author.ID == stu) {
 		s.ChannelMessageSend(m.ChannelID, "Stop tinkering...")
 	}
 
@@ -159,5 +209,17 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.Contains(m.Content, "!roll") {
 		s.ChannelMessageSend(m.ChannelID, GetRandNumStr())
+	}
+
+	if strings.Contains(strings.ToLower(m.Content), "todd") {
+		s.ChannelMessageSend(m.ChannelID, "Fix my car... for free!")
+	}
+
+	if strings.Contains(strings.ToLower(m.Content), "arch") {
+		s.ChannelMessageSend(m.ChannelID, "My grandma can install arch... it's not hard.")
+	}
+	
+	if strings.Contains(strings.ToLower(m.Content), "kali") {
+		s.ChannelMessageSend(m.ChannelID, "Script Kiddie Detected")
 	}
 }

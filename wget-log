@@ -1,0 +1,11 @@
+--2020-09-19 13:16:14--  https://media4.giphy.com/media/aZ3LDBs1ExsE8/200.gif?cid=ecf05e47ildy2zcdnfuo5xcyhmdsmekop2h7ozuin723h0qw
+Resolving media4.giphy.com (media4.giphy.com)... 151.101.198.2
+Connecting to media4.giphy.com (media4.giphy.com)|151.101.198.2|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 449282 (439K) [image/gif]
+Saving to: ‘200.gif?cid=ecf05e47ildy2zcdnfuo5xcyhmdsmekop2h7ozuin723h0qw’
+
+           200.gif?cid   0%[                           ]       0  --.-KB/s               200.gif?cid=ecf05e47il 100%[==========================>] 438.75K  --.-KB/s    in 0.1s    
+
+2020-09-19 13:16:14 (4.28 MB/s) - ‘200.gif?cid=ecf05e47ildy2zcdnfuo5xcyhmdsmekop2h7ozuin723h0qw’ saved [449282/449282]
+
