@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
@@ -53,6 +52,7 @@ func main() {
 	// Cleanly close down the Discord session.
 	dg.Close()
 }
+<<<<<<< HEAD
 
 // This function will be called (due to AddHandler above) every time a new
 // message is created on any channel that the autenticated bot has access to.
@@ -223,3 +223,5 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(m.ChannelID, "Script Kiddie Detected")
 	}
 }
+=======
+>>>>>>> f3348f023988bc45ddbdf68c2f1139a3c1d2dc75
